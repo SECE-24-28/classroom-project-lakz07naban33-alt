@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Registration Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f7ff;
+            padding: 40px;
+        }
+
+        .container {
+            width: 450px;
+            margin: auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 12px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #005c99;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 14px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #005c99;
+            color: white;
+            border: none;
+            font-size: 17px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #003d66;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let email = document.getElementById("email").value;
+            let mobile = document.getElementById("mobile").value;
+            let gender = document.getElementById("gender").value;
+            let course = document.getElementById("course").value;
+            let center = document.getElementById("center").value;
+            let date = document.getElementById("date").value;
+            let address = document.getElementById("address").value;
+
+            if (name === "") {
+                alert("Please enter your full name");
+                return false;
+            }
+
+            if (age === "" || age < 10 || age > 100) {
+                alert("Age must be between 10 and 100");
+                return false;
+            }
+
+            let emailCheck = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailCheck.test(email)) {
+                alert("Enter a valid email address");
+                return false;
+            }
+
+            if (!/^[0-9]{10}$/.test(mobile)) {
+                alert("Enter a valid 10-digit mobile number");
+                return false;
+            }
+
+            if (gender === "") {
+                alert("Please select your gender");
+                return false;
+            }
+
+            if (course === "") {
+                alert("Please select an exam/course");
+                return false;
+            }
+
+            if (center === "") {
+                alert("Please select your exam center");
+                return false;
+            }
+
+            let today = new Date().toISOString().split("T")[0];
+            if (date < today) {
+                alert("Exam date cannot be in the past");
+                return false;
+            }
+
+            if (address === "") {
+                alert("Please enter your address");
+                return false;
+            }
+
+            alert("Exam Registration Successful!");
+            return true;
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Exam Registration Form</h2>
+
+        <form onsubmit="return validateForm()">
+
+            <label>Full Name:</label>
+            <input type="text" id="name">
+
+            <label>Age:</label>
+            <input type="number" id="age">
+
+            <label>Email:</label>
+            <input type="text" id="email">
+
+            <label>Mobile Number:</label>
+            <input type="text" id="mobile">
+
+            <label>Gender:</label>
+            <select id="gender">
+                <option value="">--Select Gender--</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+
+            <label>Course / Exam Name:</label>
+            <select id="course">
+                <option value="">--Select Course--</option>
+                <option>Computer Science Exam</option>
+                <option>Mathematics Exam</option>
+                <option>English Exam</option>
+                <option>Physics Exam</option>
+            </select>
+
+            <label>Exam Center:</label>
+            <select id="center">
+                <option value="">--Select Center--</option>
+                <option>Chennai</option>
+                <option>Bangalore</option>
+                <option>Coimbatore</option>
+                <option>Hyderabad</option>
+            </select>
+
+            <label>Date of Exam:</label>
+            <input type="date" id="date">
+
+            <label>Address:</label>
+            <textarea id="address" rows="3"></textarea>
+
+            <button type="submit">Submit Registration</button>
+
+        </form>
+    </div>
+
+</body>
+</html>

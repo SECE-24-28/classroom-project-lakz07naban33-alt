@@ -6,11 +6,9 @@
   <title>Job Application</title>
 
   <style>
-    /* Simple reset */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html,body { height: 100%; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #471682; color: #1f2937; }
 
-    /* Center card */
     .wrap {
       min-height: 100vh;
       display: flex;
@@ -42,7 +40,6 @@
       grid-template-columns: 1fr 1fr;
     }
 
-    /* Make wide rows span columns */
     .full { grid-column: 1 / -1; }
 
     label {
@@ -107,20 +104,17 @@
       color: #0f172a;
     }
 
-    /* Small helper area */
     .meta {
       font-size: 0.82rem;
       color: #475569;
       margin-bottom: 12px;
     }
 
-    /* Simple responsive */
     @media (max-width: 720px) {
       form { grid-template-columns: 1fr; }
       .actions { justify-content: stretch; flex-direction: column-reverse; }
     }
 
-    /* tiny footer */
     footer {
       font-size: 0.8rem;
       color: #94a3b8;
@@ -204,21 +198,15 @@
     </main>
   </div>
 
-  <!--
-    This small script shows a friendly submit confirmation.
-    In real deployment, replace with actual form posting logic.
-  -->
   <script>
     document.getElementById('applicationForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      // Simple front-end validation example:
       const name = document.getElementById('fullname').value.trim();
       const email = document.getElementById('email').value.trim();
       if (!name || !email) {
         alert('Please fill at least your name and email.');
         return;
       }
-      // Simulate submission
       alert('Thank you, ' + name.split(' ')[0] + '! Your application was received (demo).');
       this.reset();
     });

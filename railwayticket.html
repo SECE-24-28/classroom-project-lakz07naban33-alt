@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Railway Ticket Booking Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e3f2fd;
+            padding: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #0d47a1;
+        }
+
+        form {
+            width: 450px;
+            background: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #777;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0d47a1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #08306b;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h2>Railway Ticket Booking Form</h2>
+
+<form id="railForm" onsubmit="return validateForm()">
+
+    <label>Full Name</label>
+    <input type="text" id="name" required>
+
+    <label>Email</label>
+    <input type="email" id="email" required>
+
+    <label>Phone Number</label>
+    <input type="text" id="phone" required pattern="[0-9]{10}" placeholder="10-digit number">
+
+    <label>From Station</label>
+    <input type="text" id="from" required>
+
+    <label>To Station</label>
+    <input type="text" id="to" required>
+
+    <label>Date of Journey</label>
+    <input type="date" id="date" required>
+
+    <label>Class Type</label>
+    <select id="class" required>
+        <option value="">--Select--</option>
+        <option>Sleeper</option>
+        <option>AC 3-Tier</option>
+        <option>AC 2-Tier</option>
+        <option>First Class</option>
+    </select>
+
+    <label>No. of Passengers</label>
+    <input type="number" id="passengers" required min="1" max="6">
+
+    <p class="error" id="errorMsg"></p>
+
+    <button type="submit">Book Ticket</button>
+
+</form>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let from = document.getElementById("from").value.trim();
+    let to = document.getElementById("to").value.trim();
+    let date = document.getElementById("date").value.trim();
+    let passengers = document.getElementById("passengers").value;
+
+    let error = document.getElementById("errorMsg");
+    error.textContent = "";
+
+    if (name.length < 3) {
+        error.textContent = "Name should have at least 3 characters";
+        return false;
+    }
+
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(emailPattern)) {
+        error.textContent = "Enter a valid email address";
+        return false;
+    }
+
+    if (!/^[0-9]{10}$/.test(phone)) {
+        error.textContent = "Phone number must be 10 digits";
+        return false;
+    }
+
+    if (from.toLowerCase() === to.toLowerCase()) {
+        error.textContent = "'From' and 'To' stations must be different";
+        return false;
+    }
+
+    if (date === "") {
+        error.textContent = "Please select a journey date";
+        return false;
+    }
+
+    if (passengers < 1 || passengers > 6) {
+        error.textContent = "You can book between 1 to 6 passengers only";
+        return false;
+    }
+
+    alert("Railway Ticket Booked Successfully!");
+    return true;
+}
+</script>
+
+</body>
+</html>
